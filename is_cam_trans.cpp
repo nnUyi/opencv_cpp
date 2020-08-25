@@ -195,7 +195,30 @@ void CameraDetector::image_preprocess(Mat& img, Point top_rook_points[1][4], Poi
 bool CameraDetector::sift_detection(Mat img, Mat kp_img, \
                                         Mat des_img, Mat rect_top, \
                                         Mat rect_bottom) {
-    
+    int h, w;
+    h = img.rows;
+    w = img.cols;
+    int h_half = int(h/2);
+    int w_half = int(w/2);
+
+    for (int i=0; i<2; i++) {
+        for (int j=0; j<2; j++) {
+            int h_begin = i * h_half;
+            int h_end = (i + 1) * h_half;
+            if (h_end >= h) {
+                h_end = h;
+            }
+
+            int w_begin = j * w_half;
+            int w_end = (j + 1) * w_half;
+            if (w_end >= w) {
+                w_end = w;
+            }
+            Mat img_roi = img(Range(h_begin, h_end), Range(w_begin, w_end)).clone();
+            
+        }
+    }
+
     return true;                              
 }
 
